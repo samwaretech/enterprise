@@ -1,9 +1,9 @@
-import axios from '@/axios'
-import router from '@/router'
-import {signIn, signUp} from '../action.type'
-import {setResponse, setStatus, setUser} from '../mutation.type'
+// import axios from 'axios'
+// import router from '@/router'
+import { signIn, signUp } from '../action.type'
+import { setResponse, setStatus } from '../mutation.type'
 
-const state=()=>({
+const state = () => ({
     response: '',
     status: ''
 })
@@ -11,21 +11,23 @@ const state=()=>({
 const getters = {}
 
 const action = {
-    [signIn]({ commit }, payload){
+    [signIn]({ commit }, payload) {
         commit(setResponse, 'loading')
-        //axios senddata
+        // axios api
+        console.log(payload);
     },
-    [signUp]({ commit }, payload){
+    [signUp]({ commit }, payload) {
         commit(setResponse, 'loading')
         //axios send data
+        console.log(payload);
     }
 }
 
 const mutations = {
-    [setResponse](state,payload){
+    [setResponse](state, payload) {
         state.response = payload
     },
-    [setStatus](state,payload){
+    [setStatus](state, payload) {
         state.status = payload
     }
 }

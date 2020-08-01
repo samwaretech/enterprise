@@ -5,7 +5,12 @@ import dashboard from '../views/dashboard/main.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const isAuth = (to, from, next)=> {
+  let token = localStorage.getItem('token')
+  token ? next() : next('/')
+}
+
+const routes = [
   {
     path: '/',
     name: 'Home',
@@ -14,7 +19,8 @@ Vue.use(VueRouter)
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: dashboard
+    component: dashboard,
+    beforeEnter: isAuth
   }
 ]
 

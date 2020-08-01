@@ -1,7 +1,6 @@
 <template>
   <div>
-
-<!-- Side bar -->
+    <!-- Side bar -->
     <div class="side">
       <div class="py-3">
         <button class="btn btn-md btn-danger btn-block">Samware.io</button>
@@ -9,61 +8,79 @@
 
       <div class="mt-4">
         <span class="text-secondary" style="font-size:10px">Account</span>
-        <button v-on:click="views(1)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
+        <button
+          v-on:click="views(1)"
+          class="text-left btn btn-sm btn-light btn-block"
+          style="font-size:12px;"
+        >
           <i class="mr-1 fas fa-user"></i> My Account
         </button>
         <span class="text-secondary" style="font-size:10px">Project</span>
-        <button v-on:click="views(2)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
+        <button
+          v-on:click="views(2)"
+          class="text-left btn btn-sm btn-light btn-block"
+          style="font-size:12px;"
+        >
           <i class="mr-1 far fa-clone text-danger"></i> All Project
         </button>
-        <button v-on:click="views(4)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
+        <button
+          v-on:click="views(4)"
+          class="text-left btn btn-sm btn-light btn-block"
+          style="font-size:12px;"
+        >
           <i class="mr-1 far fa-plus-square"></i> Add Project
         </button>
         <button class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
           <i class="mr-1 far fa-folder-open"></i>Documentation
         </button>
         <span class="text-secondary" style="font-size:10px">Marketing</span>
-        <button v-on:click="views(3)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">Customers</button>
+        <button
+          v-on:click="views(3)"
+          class="text-left btn btn-sm btn-light btn-block"
+          style="font-size:12px;"
+        >Customers</button>
       </div>
       <div class="py-3 mt-5">
-        <button class="btn btn-sm border btn-block">
+        <button v-on:click="logout()" class="btn btn-sm border btn-block">
           <i class="far fa-arrow-alt-circle-left"></i> Sign Out
         </button>
       </div>
     </div>
 
-
     <div class="main-content">
       <myAccount v-if="view === 1" />
-      <customer v-else-if="view === 3"/>
-      <allProject v-else-if="view === 2"/>
-      <addProject v-else-if="view === 4"/>
+      <customer v-else-if="view === 3" />
+      <allProject v-else-if="view === 2" />
+      <addProject v-else-if="view === 4" />
     </div>
-
   </div>
 </template>
 
 <script>
-import myAccount from '@/components/myAccount.vue';
-import allProject from '@/components/allProject.vue';
-import customer from '@/components/customer.vue';
-import addProject from '@/components/addProject.vue';
+import myAccount from "@/components/myAccount.vue";
+import allProject from "@/components/allProject.vue";
+import customer from "@/components/customer.vue";
+import addProject from "@/components/addProject.vue";
 
 export default {
-  components:{
+  components: {
     myAccount,
     allProject,
     customer,
     addProject
   },
-  data(){
+  data() {
     return {
-      view:1
-    }
+      view: 1
+    };
   },
-  methods:{
-    views(payload){
-      this.view = payload
+  methods: {
+    views(payload) {
+      this.view = payload;
+    },
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.replace({ name: 'Home' })
     }
   }
 };

@@ -35,8 +35,9 @@
                 <input
                   type="password"
                   class="form-control form-control-sm"
-                  id="exampleInputPassword1"
+                  id="exampleInputPassword"
                   placeholder="Password"
+                  autocomplete="current-pasword"
                   v-model="login.password"
                 />
               </div>
@@ -82,7 +83,6 @@ export default {
       ) {
         console.log('cek data');
       } else {
-        console.log(this.login);
         this.$store.dispatch(signIn, this.login);
       }
     },

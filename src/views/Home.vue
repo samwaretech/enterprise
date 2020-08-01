@@ -57,14 +57,15 @@
 
 <script>
 import { mapState } from 'vuex'
+import { signIn } from '../store/action.type'
+
 export default {
   data() {
     return {
       login: {
         email: "",
         password: ""
-      },
-      response: ''
+      }
     };
   },
   computed: {
@@ -81,7 +82,8 @@ export default {
       ) {
         console.log('cek data');
       } else {
-        console.log('mausk');
+        console.log(this.login);
+        this.$store.dispatch(signIn, this.login);
       }
     },
     validEmail: function(email) {

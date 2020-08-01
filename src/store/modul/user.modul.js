@@ -4,17 +4,16 @@ import { signIn, signUp } from '../action.type'
 import { setResponse, setStatus } from '../mutation.type'
 
 const state = () => ({
-    response: '',
+    response: 'tes',
     status: ''
 })
 
 const getters = {}
 
-const action = {
+const actions = {
     [signIn]({ commit }, payload) {
-        commit(setResponse, 'loading')
-        // axios api
-        console.log(payload);
+        commit(setResponse, 'loading.')
+        commit(setResponse, payload)
     },
     [signUp]({ commit }, payload) {
         commit(setResponse, 'loading')
@@ -35,6 +34,6 @@ const mutations = {
 export default {
     state,
     getters,
-    action,
+    actions,
     mutations
 }

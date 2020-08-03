@@ -35,6 +35,7 @@
               <th scope="col">Cost</th>
               <th scope="col">Status</th>
               <th scope="col">Note</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -46,24 +47,10 @@
               <td>Rp 500.000</td>
               <td>in process</td>
               <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla velit blanditiis deserunt magnam, voluptates fugit! Explicabo omnis possimus laudantium illo debitis facere soluta, dicta rem facilis quod voluptates cupiditate eligendi.</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Website sambeer.co</td>
-              <td>Web app</td>
-              <td>Faza</td>
-              <td>Rp 500.000</td>
-              <td>in process</td>
-              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla velit blanditiis deserunt magnam, voluptates fugit! Explicabo omnis possimus laudantium illo debitis facere soluta, dicta rem facilis quod voluptates cupiditate eligendi.</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Website sambeer.co</td>
-              <td>Web app</td>
-              <td>Faza</td>
-              <td>Rp 500.000</td>
-              <td>in process</td>
-              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla velit blanditiis deserunt magnam, voluptates fugit! Explicabo omnis possimus laudantium illo debitis facere soluta, dicta rem facilis quod voluptates cupiditate eligendi.</td>
+              <td>
+                <button class="m-1 btn btn-sm border"><i class="fas fa-pencil-alt"></i></button>
+                <button class="m-1  btn btn-sm border"><i class="far fa-trash-alt"></i></button>
+              </td>
             </tr>
           </tbody>
         </table>

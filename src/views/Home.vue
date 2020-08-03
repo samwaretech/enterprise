@@ -15,7 +15,6 @@
         <div class="col">
           <div class="px-3 py-5 m-1 bg-white rounded shadow">
             <div class="mb-4 text-secondary">Sign In</div>
-            {{ response }}
             <form id="doSignIn" @submit.prevent="doSignIn">
               <div class="form-group">
                 <input
@@ -40,6 +39,7 @@
                   autocomplete="current-pasword"
                   v-model="login.password"
                 />
+                <span class="text-danger" style="font-size:12px">{{ response }}</span>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-danger btn-block">Login</button>
@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { signIn } from '../store/action.type'
+import { mapState } from "vuex";
+import { signIn } from "../store/action.type";
 
 export default {
   data() {
@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     ...mapState({
-        response: state => state.user.response
+      response: state => state.user.response
     })
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
         !this.login.password ||
         !this.validEmail(this.login.email)
       ) {
-        console.log('cek data');
+        console.log("cek data");
       } else {
         this.$store.dispatch(signIn, this.login);
       }

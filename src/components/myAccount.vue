@@ -8,13 +8,13 @@
         <div class="col">
           <form>
             <div class="form-group">
-              <label for="usernmae">Usernmae</label>
+              <label for="username">Username</label>
               <input
                 type="text"
                 class="form-control form-control-sm"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                value="fazaio"
+                v-bind:value='user.username'
                 readonly
               />
             </div>
@@ -23,8 +23,10 @@
               <input
                 type="password"
                 class="form-control form-control-sm"
-                id="exampleInputPassword1"
-                placeholder="Password"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                value="fazaio"
+                readonly
               />
             </div>
           </form>
@@ -38,7 +40,7 @@
                 class="form-control form-control-sm"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                value="faza6028@gmail.com"
+                v-bind:value='user.email'
                 readonly
               />
             </div>
@@ -46,7 +48,7 @@
           <div>
             Anak Perusahaan:
             <br />
-            <button class="btn btn-danger">Samware Tech</button>
+            <button class="btn btn-danger">{{ user.unit }}</button>
           </div>
         </div>
       </div>
@@ -55,7 +57,20 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+import { fetchUser } from '../store/action.type'
+
+export default {
+  computed: {
+    ...mapState({
+      user: state => state.user.data
+    })
+  },
+  created(){
+    this.$store.dispatch(fetchUser)
+  },
+  
+}
 </script>
 
 <style>

@@ -1,11 +1,11 @@
 import axios from 'axios'
 import router from '@/router'
-import { signIn, signUp } from '../action.type'
-import { setResponse, setStatus } from '../mutation.type'
+import { signIn, signUp, fetchUser } from '../action.type'
+import { setResponse, setUser } from '../mutation.type'
 
 const state = () => ({
     response: '',
-    status: ''
+    data: ''
 })
 
 const getters = {}
@@ -33,6 +33,22 @@ const actions = {
         commit(setResponse, 'loading')
         //axios send data
         console.log(payload);
+    },
+    [fetchUser]({commit}){
+        const headers = {
+            Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        axios.get('http://localhost:3000/profile', {headers:headers})
+        .then(function(res){
+            if (res.data.status) {
+                commit(setUser, res.data.msg)
+                console.log(res.data);
+            }else{
+                console.log(res.data.msg);
+            }
+        }).catch(function(res){
+            console.log(res);
+        })
     }
 }
 
@@ -40,8 +56,8 @@ const mutations = {
     [setResponse](state, payload) {
         state.response = payload
     },
-    [setStatus](state, payload) {
-        state.status = payload
+    [setUser](state, payload) {
+        state.data = payload
     }
 }
 

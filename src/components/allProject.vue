@@ -16,7 +16,9 @@
               placeholder="Username"
               aria-label="Username"
               aria-describedby="addon-wrapping"
+              v-model="find"
             />
+            {{ find }}
           </div>
         </div>
         <div class="col">
@@ -39,17 +41,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Website sambeer.co</td>
-              <td>Web app</td>
-              <td>Faza</td>
-              <td>Rp 500.000</td>
-              <td>in process</td>
-              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla velit blanditiis deserunt magnam, voluptates fugit! Explicabo omnis possimus laudantium illo debitis facere soluta, dicta rem facilis quod voluptates cupiditate eligendi.</td>
+            <tr v-for="data in dataAllProject" :key="data.id_project">
+              <th>{{ data.id_project }}</th>
+              <td>{{ data.tittle }}</td>
+              <td>{{ data.service }}</td>
+              <td>{{ data.developer }}</td>
+              <td>{{ data.cost }}</td>
+              <td>{{ data.status }}</td>
+              <td>{{ data.note }}</td>
               <td>
                 <button class="m-1 btn btn-sm border"><i class="fas fa-pencil-alt"></i></button>
-                <button class="m-1  btn btn-sm border"><i class="far fa-trash-alt"></i></button>
+                <button v-on:click="hapus(data.id_project)" class="m-1  btn btn-sm border"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
           </tbody>
@@ -60,7 +62,28 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex"
+import { allProject, deleteProject } from '../store/action.type'
+export default {
+  data(){
+    return {
+      find: 'wow'
+    }
+  },
+  computed:{
+    ...mapState({
+      dataAllProject: state => state.data.data.allProject
+    })
+  },
+  created(){
+    this.$store.dispatch(allProject)
+  },
+  methods:{
+    hapus(payload){
+      this.$store.dispatch(deleteProject, payload)
+    }
+  }
+};
 </script>
 
 <style>

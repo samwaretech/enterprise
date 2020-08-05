@@ -5,3 +5,5 @@ export const fetchUser  = 'fetchUser';
 
 // Data
 export const addProject = 'addProject'
+export const allProject = 'allProject'
+export const deleteProject = 'deleteProject'

@@ -24,6 +24,9 @@ const actions = {
                 commit(setResponse, '')
             }else{
                 commit(setResponse, res.data.msg)
+                setTimeout(() => {
+                    commit(setResponse, '')
+                }, 3000);
             }
         }).catch(function(res){
             commit(setResponse, res)
@@ -42,9 +45,6 @@ const actions = {
         .then(function(res){
             if (res.data.status) {
                 commit(setUser, res.data.msg)
-                console.log(res.data);
-            }else{
-                console.log(res.data.msg);
             }
         }).catch(function(res){
             console.log(res);

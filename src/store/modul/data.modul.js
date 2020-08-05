@@ -1,18 +1,19 @@
 import axios from 'axios'
-import { addProject } from '../action.type'
-import { setResponse, setStatus } from '../mutation.type'
+import { addProject, allProject, deleteProject } from '../action.type'
+import { setResponse, setData } from '../mutation.type'
 
 const state = () => ({
     response: '',
-    status: ''
+    status: '',
+    data:{
+        allProject: ''
+    }
 })
 
 const getters = {}
 
 const actions = {
     [addProject]({ commit }, payload) {
-        commit(setResponse, 'tes')
-
         var data = {
             tittle  :   payload.tittle,
             service :   payload.service,
@@ -31,11 +32,39 @@ const actions = {
             if (res.data.status) {
                 commit(setResponse, '')
                 commit(setResponse, res.data.msg)
+                setTimeout(() => {
+                    commit(setResponse, '')
+                }, 3000);
             } else {
                 commit(setResponse, res.data.msg)
+                setTimeout(() => {
+                    commit(setResponse, '')
+                }, 3000);
             }
         }).catch(function (res) {
             commit(setResponse, res)
+        })
+    },
+    [allProject]({commit}){
+        const headers = {
+            Authorization: "Bearer " + localStorage.getItem('token')
+        }
+        axios.get('http://localhost:3000/api/data/allProject',{ headers : headers })
+        .then(function(res){
+            commit(setData, res.data.msg)
+        }).catch(function(res){
+            commit(setData, res.data)
+        })
+    },
+    [deleteProject]({commit,payload}){
+        const headers = {
+            Authorization: "Bearer " + localStorage.getItem('token')
+        }
+        axios.delete('http://localhost:3000/api/data/allproject'+payload.id_project, {headers:headers})
+        .then(function(res){
+            commit(setResponse, res.data.msg)
+        }).catch(function(res){
+            commit(setResponse, res.data)
         })
     }
 }
@@ -44,8 +73,8 @@ const mutations = {
     [setResponse](state, payload) {
         state.response = payload
     },
-    [setStatus](state, payload) {
-        state.status = payload
+    [setData](state, payload) {
+        state.data.allProject = payload
     }
 }
 

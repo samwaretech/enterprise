@@ -7,3 +7,4 @@ export const fetchUser  = 'fetchUser';
 export const addProject = 'addProject'
 export const allProject = 'allProject'
 export const deleteProject = 'deleteProject'
+export const editProject = 'editProject'

@@ -4,6 +4,9 @@
       <i class="far far fa-folder-open"></i> PROJECT LIST
     </div>
     <div class="m-2 p-4 bg-white shadow rounded">
+      <div v-if="response" class="alert alert-success">
+        {{ response }}
+      </div>
       <div class="row">
         <div class="col">
           <div class="input-group input-group-sm flex-nowrap">
@@ -18,7 +21,6 @@
               aria-describedby="addon-wrapping"
               v-model="find"
             />
-            {{ find }}
           </div>
         </div>
         <div class="col">
@@ -67,12 +69,13 @@ import { allProject, deleteProject } from '../store/action.type'
 export default {
   data(){
     return {
-      find: 'wow'
+      find: ''
     }
   },
   computed:{
     ...mapState({
-      dataAllProject: state => state.data.data.allProject
+      dataAllProject: state => state.data.data.allProject,
+      response: state => state.data.response
     })
   },
   created(){

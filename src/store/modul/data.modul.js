@@ -41,8 +41,8 @@ const actions = {
                     commit(setResponse, '')
                 }, 3000);
             }
-        }).catch(function (res) {
-            commit(setResponse, res)
+        }).catch(function () {
+            commit(setResponse, 'Server is off!')
         })
     },
     [allProject]({commit}){
@@ -52,19 +52,19 @@ const actions = {
         axios.get('http://localhost:3000/api/data/allProject',{ headers : headers })
         .then(function(res){
             commit(setData, res.data.msg)
-        }).catch(function(res){
-            commit(setData, res.data)
+        }).catch(function(){
+            commit(setResponse, 'Server is off!')
         })
     },
-    [deleteProject]({commit,payload}){
+    [deleteProject]({commit}, payload){
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
         }
-        axios.delete('http://localhost:3000/api/data/allproject'+payload.id_project, {headers:headers})
+        axios.delete('http://localhost:3000/api/data/allproject/'+payload, {headers:headers})
         .then(function(res){
             commit(setResponse, res.data.msg)
-        }).catch(function(res){
-            commit(setResponse, res.data)
+        }).catch(function(){
+            commit(setResponse, 'Server is off!')
         })
     }
 }

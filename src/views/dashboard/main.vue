@@ -33,6 +33,9 @@
         <button v-on:click="views(5)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
           <i class="mr-1 far fa-folder-open"></i>Documentation
         </button>
+        <button v-on:click="views(6)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
+          <i class="mr-1 far fa-folder-open"></i>Assets Account
+        </button>
         <span class="text-secondary" style="font-size:10px">Marketing</span>
         <button
           v-on:click="views(3)"
@@ -53,6 +56,7 @@
       <allProject v-else-if="view === 2" />
       <addProject v-else-if="view === 4" />
       <documentation v-else-if="view === 5" />
+      <allAssetsAccount v-else-if="view === 6" />
     </div>
   </div>
 </template>
@@ -63,6 +67,7 @@ import allProject from "@/components/allProject.vue";
 import customer from "@/components/customer.vue";
 import addProject from "@/components/addProject.vue";
 import documentation from "@/components/documentation.vue";
+import allAssetsAccount from "@/components/allAssetsAccount.vue"
 
 export default {
   components: {
@@ -70,7 +75,8 @@ export default {
     allProject,
     customer,
     addProject,
-    documentation
+    documentation,
+    allAssetsAccount
   },
   data() {
     return {

@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div class="m-2 p-3 bg-white shadow rounded">
+    <navmenu />
+    <div class="main-content">
+      <div class="m-2 p-3 bg-white shadow rounded">
       <i class="far far fa-folder-open"></i> PROJECT LIST
     </div>
     <div class="m-2 p-4 bg-white shadow rounded">
-      <div id="alldata" v-if="true">
+      <div id="alldata" v-if="!editData.tittle && !editData.cost">
         <div v-if="errors" class="alert alert-danger">{{ errors }}</div>
         <div v-if="response" class="alert alert-success">{{ response }}</div>
         <div class="row">
@@ -35,19 +37,23 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Email</th>
-                <th scope="col">Password</th>
-                <th scope="col">Site Register</th>
+                <th scope="col">Tittle</th>
+                <th scope="col">Service</th>
+                <th scope="col">Developer</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Status</th>
                 <th scope="col">Note</th>
-                <th scope="col">Action</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="data in dataAllAccount" :key="data.id_project">
-                <th>{{ data.id_assets_account }}</th>
-                <td>{{ data.email_register }}</td>
-                <td>{{ data.password_register }}</td>
-                <td>{{ data.sites }}</td>
+              <tr v-for="data in dataAllProject" :key="data.id_project">
+                <th>{{ data.id_project }}</th>
+                <td>{{ data.tittle }}</td>
+                <td>{{ data.service }}</td>
+                <td>{{ data.developer }}</td>
+                <td>{{ data.cost }}</td>
+                <td>{{ data.status }}</td>
                 <td>{{ data.note }}</td>
                 <td>
                   <button v-on:click="edit(data)" class="m-1 btn btn-sm border">
@@ -135,34 +141,70 @@
         </form>
       </div>
     </div>
+    </div>
   </div>
 </template>
 
 <script>
+import navmenu from '@/components/navmenu.vue'
 import { mapState } from "vuex";
-import { all_assets_account } from "../store/action.type";
+import { allProject, deleteProject, editProject } from "@/store/action.type";
 export default {
+  components: {
+    navmenu
+  },
   data() {
     return {
       find: "",
       errors: false,
       editData: {
-          username_register: '',
-          password_register: '',
-          sites: '',
-          note: ''
-      },
+        tittle: "",
+        service: "",
+        status: "",
+        developer: "",
+        cost: "",
+        note: ""
+      }
     };
   },
   computed: {
     ...mapState({
-      dataAllAccount: (state) => state.data.data.allAssetsAccount,
-      response: (state) => state.data.response,
-    }),
+      dataAllProject: state => state.data.data.allProject,
+      response: state => state.data.response
+    })
   },
   created() {
-    this.$store.dispatch(all_assets_account);
+    this.$store.dispatch(allProject);
   },
+  methods: {
+    hapus(payload) {
+      this.$store.dispatch(deleteProject, payload);
+    },
+    edit(payload) {
+      this.editData.id_project = payload.id_project;
+      this.editData.tittle = payload.tittle;
+      this.editData.service = payload.service;
+      this.editData.status = payload.status;
+      this.editData.developer = payload.developer;
+      this.editData.cost = payload.cost;
+      this.editData.note = payload.note;
+    },
+    doEdit() {
+      if (
+        !this.editData.tittle ||
+        !this.editData.service ||
+        !this.editData.status ||
+        !this.editData.developer ||
+        !this.editData.cost ||
+        !this.editData.note
+      ) {
+        this.errors = "Check your data!";
+      } else {
+        this.$store.dispatch(editProject, this.editData);
+        this.editData = false
+      }
+    }
+  }
 };
 </script>
 

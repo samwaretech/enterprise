@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import dashboard from '../views/dashboard/main.vue'
 
 
 Vue.use(VueRouter)
@@ -19,23 +18,20 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: dashboard,
+    component: () => import('@/views/dashboard/account.vue'),
     beforeEnter: isAuth
   },
   {
     path: '/dashboard/assets',
     name: 'assets',
-    component: () => import('@/views/dashboard/assets.vue')
-  },
-  {
-    path: '/dashboard/user',
-    name: 'user',
-    component: () => import('@/views/dashboard/account.vue')
+    component: () => import('@/views/dashboard/assets.vue'),
+    beforeEnter: isAuth
   },
   {
     path: '/dashboard/project',
     name: 'project',
-    component: () => import('@/views/dashboard/project.vue')
+    component: () => import('@/views/dashboard/project.vue'),
+    beforeEnter: isAuth
   }
 ]
 

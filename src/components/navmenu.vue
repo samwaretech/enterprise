@@ -7,34 +7,27 @@
       </div>
 
       <div class="mt-4">
-        <span class="text-secondary" style="font-size:10px">Account</span>
-        <button
-          v-on:click="views(1)"
+        <div class="my-2 text-secondary" style="font-size:10px">Account</div>
+        <router-link to="/dashboard"
           class="text-left btn btn-sm btn-light btn-block"
           style="font-size:12px;"
         >
           <i class="mr-1 fas fa-user"></i> My Account
-        </button>
-        <span class="text-secondary" style="font-size:10px">Project</span>
-        <button
-          v-on:click="views(2)"
+        </router-link>
+        <div class="mt-3 mb-2 text-secondary" style="font-size:10px">Project</div>
+        <router-link to="/dashboard/project"
           class="text-left btn btn-sm btn-light btn-block"
           style="font-size:12px;"
         >
-          <i class="mr-1 far fa-clone text-danger"></i> All Project
-        </button>
-        <button v-on:click="views(5)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
-          <i class="mr-1 far fa-folder-open"></i>Documentation
-        </button>
-        <button v-on:click="views(6)" class="text-left btn btn-sm btn-light btn-block" style="font-size:12px;">
-          <i class="mr-1 far fa-folder-open"></i>Assets Account
-        </button>
-        <span class="text-secondary" style="font-size:10px">Marketing</span>
-        <button
-          v-on:click="views(3)"
+          <i class="mr-1 fas fa-cubes text-danger"></i> All Project
+        </router-link>
+        <router-link to="/dashboard/assets"
           class="text-left btn btn-sm btn-light btn-block"
           style="font-size:12px;"
-        >Customers</button>
+        >
+          <i class="mr-1 fas fa-briefcase"></i> Assets Digital
+        </router-link>
+        <div class="mt-3 mb-2 text-secondary" style="font-size:10px">Tools</div>
       </div>
       <div class="py-3 mt-5">
         <button v-on:click="logout()" class="btn btn-sm border btn-block">

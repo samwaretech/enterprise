@@ -18,14 +18,15 @@ const state = () => ({
 const getters = {}
 
 const actions = {
-    [addProject]({ commit }, payload) {
+    [addProject]({ commit, dispatch }, payload) {
         var data = {
             tittle  :   payload.tittle,
             service :   payload.service,
             status  :   payload.status,
             developer   :   payload.developer,
             cost    :   payload.cost,
-            note    :   payload.note
+            note    :   payload.note,
+            project_manager : payload.project_manager
         }
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
@@ -35,6 +36,7 @@ const actions = {
             headers : headers
         }).then(function (res) {
             if (res.data.status) {
+                dispatch(allProject)
                 commit(setResponse, '')
                 commit(setResponse, res.data.msg)
                 setTimeout(() => {
@@ -64,12 +66,13 @@ const actions = {
             }, 3000);
         })
     },
-    [deleteProject]({commit}, payload){
+    [deleteProject]({commit, dispatch}, payload){
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
         }
         instance.delete('/api/data/allproject/'+payload, {headers:headers})
         .then(function(res){
+            dispatch(allProject)
             commit(setResponse, res.data.msg)
             setTimeout(() => {
                 commit(setResponse, '')

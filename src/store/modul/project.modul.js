@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { addProject, allProject, deleteProject, editProject, all_assets_account } from '../action.type'
 import { setResponse, setData, setDataAssetsAccount } from '../mutation.type'
 
 const instance = axios.create({
@@ -10,15 +9,14 @@ const state = () => ({
     response: '',
     status: '',
     data:{
-        allProject: '',
-        allAssetsAccount: ''
+        allProject: ''
     }
 })
 
 const getters = {}
 
 const actions = {
-    [addProject]({ commit, dispatch }, payload) {
+    addProject({ commit, dispatch }, payload) {
         var data = {
             tittle  :   payload.tittle,
             service :   payload.service,
@@ -36,7 +34,7 @@ const actions = {
             headers : headers
         }).then(function (res) {
             if (res.data.status) {
-                dispatch(allProject)
+                dispatch('allProject')
                 commit(setResponse, '')
                 commit(setResponse, res.data.msg)
                 setTimeout(() => {
@@ -52,7 +50,7 @@ const actions = {
             commit(setResponse, 'Server is off!')
         })
     },
-    [allProject]({commit}){
+    allProject({commit}){
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
         }
@@ -66,13 +64,13 @@ const actions = {
             }, 3000);
         })
     },
-    [deleteProject]({commit, dispatch}, payload){
+    deleteProject({commit, dispatch}, payload){
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
         }
         instance.delete('/api/data/allproject/'+payload, {headers:headers})
         .then(function(res){
-            dispatch(allProject)
+            dispatch('allProject')
             commit(setResponse, res.data.msg)
             setTimeout(() => {
                 commit(setResponse, '')
@@ -84,7 +82,7 @@ const actions = {
             }, 3000);
         })
     },
-    [editProject]({commit, dispatch}, payload){
+    editProject({commit, dispatch}, payload){
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
         }
@@ -92,25 +90,11 @@ const actions = {
         instance.put('/api/data/allproject/'+payload.id_project, payload, {headers:headers})
         .then((res)=>{
             commit(setResponse, res.data.msg)
-            dispatch(allProject)
+            dispatch('allProject')
             setTimeout(() => {
                 commit(setResponse, '')
             }, 3000);
         }).catch(()=>{
-            commit(setResponse, 'Server is off!')
-            setTimeout(() => {
-                commit(setResponse, '')
-            }, 3000);
-        })
-    },
-    [all_assets_account]({commit}){
-        const headers = {
-            Authorization: "Bearer " + localStorage.getItem('token')
-        }
-        instance.get('/api/data/assets/all_account',{ headers : headers })
-        .then(function(res){
-            commit(setDataAssetsAccount, res.data.msg)
-        }).catch(function(){
             commit(setResponse, 'Server is off!')
             setTimeout(() => {
                 commit(setResponse, '')
@@ -132,6 +116,7 @@ const mutations = {
 }
 
 export default {
+    namespaced: true,
     state,
     getters,
     actions,

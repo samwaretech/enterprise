@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from '@/router'
-import { signIn, signUp, fetchUser } from '../action.type'
+import { signIn, signUp } from '../action.type'
 import { setResponse, setUser } from '../mutation.type'
 
 const instance = axios.create({
@@ -42,7 +42,7 @@ const actions = {
         //axios send data
         console.log(payload);
     },
-    [fetchUser]({commit}){
+    fetchUser({commit}){
         const headers = {
             Authorization: "Bearer " + localStorage.getItem('token')
           }

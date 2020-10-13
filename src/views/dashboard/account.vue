@@ -61,7 +61,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { fetchUser } from "@/store/action.type";
+// import { fetchUser } from "@/store/action.type";
 import navmenu from "@/components/navmenu.vue";
 
 export default {
@@ -74,7 +74,7 @@ export default {
     }),
   },
   created() {
-    this.$store.dispatch(fetchUser);
+    this.$store.dispatch('fetchUser');
   },
 };
 </script>

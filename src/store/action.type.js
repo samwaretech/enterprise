@@ -10,3 +10,4 @@ export const deleteProject = 'deleteProject'
 export const editProject = 'editProject'
 
 export const all_assets_account = 'all_assets_account'
+export const addAssetsAccount = 'addAssetsAccount'

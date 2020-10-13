@@ -254,12 +254,6 @@
 <script>
 import navmenu from "@/components/navmenu.vue";
 import { mapState } from "vuex";
-import {
-  allProject,
-  deleteProject,
-  editProject,
-  addProject,
-} from "@/store/action.type";
 export default {
   components: {
     navmenu,
@@ -291,12 +285,12 @@ export default {
   },
   computed: {
     ...mapState({
-      dataAllProject: (state) => state.data.data.allProject,
-      response: (state) => state.data.response,
+      dataAllProject: (state) => state.project.data.allProject,
+      response: (state) => state.project.response,
     }),
   },
   created() {
-    this.$store.dispatch(allProject);
+    this.$store.dispatch('project/allProject');
   },
   methods: {
     close(){
@@ -305,7 +299,7 @@ export default {
       this.data = ''
     },
     hapus(payload) {
-      this.$store.dispatch(deleteProject, payload);
+      this.$store.dispatch('project/deleteProject', payload);
     },
     edit(payload) {
       this.show_form_edit = true
@@ -315,7 +309,7 @@ export default {
       if (!this.data) {
         this.errors = "Check your data!!";
       } else {
-        this.$store.dispatch(editProject, this.data);
+        this.$store.dispatch('project/editProject', this.data);
         this.data = ''
         this.show_form_edit = false
       }
@@ -333,7 +327,7 @@ export default {
         this.errors = "Check your data!";
       } else {
         this.errors = false;
-        this.$store.dispatch(addProject, this.data);
+        this.$store.dispatch('project/addProject', this.data);
       }
     },
   },

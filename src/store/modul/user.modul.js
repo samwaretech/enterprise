@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from '@/router'
-import { signIn, signUp } from '../action.type'
+import { signIn } from '../action.type'
 import { setResponse, setUser } from '../mutation.type'
 
 const instance = axios.create({
@@ -37,10 +37,27 @@ const actions = {
             commit(setResponse, res)
         })
     },
-    [signUp]({ commit }, payload) {
+    signUp({ commit }, payload) {
         commit(setResponse, 'loading')
-        //axios send data
-        console.log(payload);
+        instance.post('api/signup', payload,).then( res => {
+            if(res.data){
+                commit(setResponse, 'Sucessfully register!')
+                setTimeout(() => {
+                    commit(setResponse, '')
+                }, 3000);
+            }else{
+                commit(setResponse, 'failed')
+                setTimeout(() => {
+                    commit(setResponse, '')
+                }, 3000);
+            }
+        }).catch(err =>{
+            commit(setResponse, err)
+            setTimeout(() => {
+                commit(setResponse, '')
+            }, 3000);
+        })
+
     },
     fetchUser({commit}){
         const headers = {

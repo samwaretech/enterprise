@@ -28,6 +28,18 @@
           <i class="mr-1 fas fa-briefcase"></i> Assets Digital
         </router-link>
         <div class="mt-3 mb-2 text-secondary" style="font-size:10px">Tools</div>
+        <router-link to="/dashboard/tools/ocr"
+          class="text-left btn btn-sm btn-light btn-block"
+          style="font-size:12px;"
+        >
+          <i class="mr-1 far fa-file-alt"></i> Ocr Covert
+        </router-link>
+        <router-link to="/dashboard/tools/mailer"
+          class="text-left btn btn-sm btn-light btn-block"
+          style="font-size:12px;"
+        >
+          <i class="mr-1 fas fa-envelope"></i> Bulk mailer
+        </router-link>
       </div>
       <div class="py-3 mt-5">
         <button v-on:click="logout()" class="btn btn-sm border btn-block">

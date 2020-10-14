@@ -13,25 +13,55 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/Home.vue'),
+    meta: {
+      tittle: 'Samware.io | Your bussiness IT solution.'
+    }
   },
   {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/views/dashboard/account.vue'),
-    beforeEnter: isAuth
+    beforeEnter: isAuth,
+    meta: {
+      tittle: 'Samware.io | Your bussiness IT solution.'
+    }
   },
   {
     path: '/dashboard/assets',
     name: 'assets',
     component: () => import('@/views/dashboard/assets.vue'),
-    beforeEnter: isAuth
+    beforeEnter: isAuth,
+    meta: {
+      tittle: 'Samware.io | Your bussiness IT solution.'
+    }
   },
   {
     path: '/dashboard/project',
     name: 'project',
     component: () => import('@/views/dashboard/project.vue'),
-    beforeEnter: isAuth
+    beforeEnter: isAuth,
+    meta: {
+      tittle: 'Samware.io | Your bussiness IT solution.'
+    }
+  },
+  {
+    path: '/dashboard/tools/ocr',
+    name: 'ocr',
+    component: () => import('@/views/dashboard/tools/ocr.vue'),
+    beforeEnter: isAuth,
+    meta: {
+      tittle: 'Samware.io | Your bussiness IT solution.'
+    }
+  },
+  {
+    path: '/dashboard/tools/mailer',
+    name: 'mailer',
+    component: () => import('@/views/dashboard/tools/mailer.vue'),
+    beforeEnter: isAuth,
+    meta: {
+      tittle: 'Samware.io | Your bussiness IT solution.'
+    }
   }
 ]
 

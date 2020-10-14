@@ -48,7 +48,7 @@
               </div>
             </form>
             <div>
-              Anak Perusahaan:
+              Part of
               <br />
               <button class="btn btn-danger">{{ user.unit }}</button>
             </div>
